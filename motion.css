@@ -1,0 +1,55 @@
+/* Motion complements the artwork; all content remains visible by default. */
+.reading-progress{position:fixed;inset:0 0 auto;height:3px;background:linear-gradient(90deg,var(--purple),var(--teal) 62%,var(--yellow));transform:scaleX(0);transform-origin:left;z-index:100;pointer-events:none}
+.motion-reduced .reading-progress{display:none}
+.button,.nav-cta,.filters button,.copy-button,.dialog-navigation button,.floating-whatsapp{transition:transform .28s cubic-bezier(.2,.8,.2,1),background-color .25s,color .25s,border-color .25s,box-shadow .28s}
+.button:active,.nav-cta:active,.filters button:active,.dialog-navigation button:active{transform:translateY(1px) scale(.98)}
+.button>span,.text-link>span,.nav-cta>span,.social-banner>a>span{display:inline-block;transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.site-header nav>a:not(.nav-cta){position:relative;padding-block:8px}
+.site-header nav>a:not(.nav-cta)::after{content:'';position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--teal);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.site-header nav>a:not(.nav-cta):focus-visible::after{transform:scaleX(1)}
+.brand img{transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.card-photo{transition:transform .4s cubic-bezier(.2,.8,.2,1),box-shadow .4s}
+.photo-arrow{transition:transform .35s,background-color .25s,color .25s}
+.card-title h3{transition:color .25s}
+.creation-card button:focus-visible .card-photo{box-shadow:0 12px 24px #6d3d921a}
+.faq-list summary>span{transition:transform .3s}
+.motion-ready:not(.motion-reduced) .faq-list details[open] p{animation:crazy-detail-in .35s ease-out both}
+.motion-ready:not(.motion-reduced) #order-preview:not([hidden]){animation:crazy-detail-in .4s ease-out both}
+.motion-ready:not(.motion-reduced) #gallery-dialog[open]{animation:crazy-dialog-in .35s cubic-bezier(.16,1,.3,1) both}
+.motion-ready:not(.motion-reduced) #gallery-dialog[open]::backdrop{animation:crazy-backdrop-in .3s ease-out both}
+.motion-ready:not(.motion-reduced) .art-sticker{animation:crazy-sticker-welcome 3.5s ease-in-out .3s 1}
+.motion-ready:not(.motion-reduced) .hero-star{animation:crazy-star-welcome 3.6s ease-in-out .3s 1}
+.motion-ready:not(.motion-reduced) .cake-word path{stroke-dasharray:440;animation:crazy-underline-in 1.1s ease-out .25s backwards}
+.motion-ready:not(.motion-reduced) .hero-doodle path{stroke-dasharray:420;animation:crazy-doodle-in 1.3s ease-out .25s backwards}
+
+@keyframes crazy-detail-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes crazy-dialog-in{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes crazy-backdrop-in{from{opacity:0}to{opacity:1}}
+@keyframes crazy-sticker-welcome{0%,100%{transform:rotate(12deg) translateY(0)}35%{transform:rotate(5deg) translateY(-10px)}70%{transform:rotate(15deg) translateY(-3px)}}
+@keyframes crazy-star-welcome{0%,100%{transform:rotate(0) scale(1)}45%{transform:rotate(32deg) scale(1.12)}}
+@keyframes crazy-underline-in{from{stroke-dashoffset:440}to{stroke-dashoffset:0}}
+@keyframes crazy-doodle-in{from{stroke-dashoffset:420}to{stroke-dashoffset:0}}
+
+@media(hover:hover) and (pointer:fine){
+  .button:hover{transform:translateY(-3px);box-shadow:0 8px 20px #23251f18}
+  .button:hover>span,.nav-cta:hover>span,.text-link:hover>span{transform:translate(3px,-2px)}
+  .site-header nav>a:hover::after{transform:scaleX(1)}
+  .brand:hover img{transform:rotate(-8deg)}
+  .nav-cta:hover{transform:translateY(-2px);box-shadow:0 6px 16px #23251f0d}
+  .filters button:hover{transform:translateY(-2px)}
+  .creation-card button:hover .card-photo{transform:translateY(-5px);box-shadow:0 14px 28px #6d3d921a}
+  .creation-card button:hover .photo-arrow{transform:rotate(45deg);background:var(--purple);color:white}
+  .creation-card button:hover h3{color:var(--purple)}
+  .social-banner>a:hover>span{transform:rotate(45deg)}
+  .floating-whatsapp:hover{transform:translateY(-3px);box-shadow:0 8px 22px #23251f25}
+}
+@media(max-width:800px){
+  .motion-ready:not(.motion-reduced) .site-header nav.is-open{animation:crazy-detail-in .25s ease-out both}
+  .reading-progress{height:2px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto!important}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reading-progress{display:none}
+  .button:hover,.nav-cta:hover,.filters button:hover,.brand:hover img,.creation-card button:hover .card-photo,.creation-card button:hover .photo-arrow,.creation-card button:hover img,.button:hover>span,.nav-cta:hover>span,.text-link:hover>span,.social-banner>a:hover>span,.floating-whatsapp:hover{transform:none!important}
+}
