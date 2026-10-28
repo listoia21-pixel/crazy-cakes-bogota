@@ -149,21 +149,17 @@ h3 { font: 700 var(--fs-lead)/1.15 var(--display); letter-spacing: -0.01em; }
 
 .stage {
   grid-column: 8 / 13; justify-self: end; position: relative;
-  width: min(100%, calc((100svh - var(--bar-h) - 150px) * 0.8), 600px);
-  padding-top: 64px;
+  width: min(100%, calc((100svh - var(--bar-h) - 190px) * 0.8), 600px);
+  padding-top: 40px;
   display: grid; justify-items: center;
 }
 .stage { translate: 0 calc(var(--hp, 0) * -56px); }
 .halo {
   scale: calc(1 + var(--hp, 0) * 0.14);
   position: absolute; z-index: 0; width: 112%; aspect-ratio: 1; border-radius: 50%;
-  left: -8%; top: 22px; background: var(--flame);
+  left: -8%; top: 0; background: var(--flame);
   transform-origin: 45% 45%;
 }
-.candle { position: absolute; z-index: 2; top: 0; left: 50%; width: 34px; height: 128px; margin-left: -17px; overflow: visible; }
-.candle-wax { fill: var(--teal); }
-.candle-stripes { fill: var(--cream); }
-.candle-wick { stroke: var(--ink); stroke-width: 2.5; stroke-linecap: round; }
 .flame, .c-flame { fill: var(--flame-hot); }
 .flame-core, .c-flame-core { fill: var(--cream); }
 .flame, .flame-core { transform-origin: 20px 38px; animation: flicker 1.8s ease-in-out infinite alternate; }
@@ -551,8 +547,7 @@ html:has(.lightbox[open]) { overflow: hidden; }
   .hero { display: block; padding-bottom: 40px; }
   .hero-copy { gap: 22px; }
   .hero-title { font-size: clamp(2.6rem, 11.2vw, 3.5rem); }
-  .stage { width: 100%; margin-top: 40px; padding-top: 52px; }
-  .candle { width: 26px; height: 100px; margin-left: -13px; }
+  .stage { width: 100%; margin-top: 40px; padding-top: 32px; }
   .halo { width: 112%; left: -6%; }
   .plate { margin-left: 0; max-width: 92%; padding: 12px 20px 14px; }
   .plate-name { font-size: 2rem; }
