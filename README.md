@@ -17,8 +17,6 @@ Sitio: https://listoia21-pixel.github.io/crazy-cakes-bogota/
 
 GitHub Pages desde la rama `main`, carpeta raíz `/`. Es HTML, CSS y JavaScript sin compilación; para revisarlo en local basta servir la carpeta con un servidor HTTP.
 
-Mientras sea una propuesta, las páginas llevan `<meta name="robots" content="noindex">` para que los buscadores no la muestren como el sitio oficial. Se quita cuando el negocio la apruebe.
-
 ## Fotos
 
 Las fotografías son de las publicaciones de [@crazycakesbogota](https://www.instagram.com/crazycakesbogota/) en Instagram (480–640 px). Antes del lanzamiento conviene reemplazarlas por los originales en mayor resolución.
