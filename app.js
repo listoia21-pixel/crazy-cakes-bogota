@@ -230,6 +230,8 @@
     "Otra idea": { cake: "#25b0b4", drip: "#14183a", band: "#ffc53a", plaque: "#fff6e6", letter: "#6b3fa0", candle: "#ffc53a" },
   };
 
+  let prefill = () => {};
+
   if (form) {
     const $ = (s) => form.querySelector(s);
     const fName = $("#f-name"), fAge = $("#f-age"), fTheme = $("#f-theme"),
@@ -302,17 +304,94 @@
       setTimeout(() => [cake, room].forEach((el) => el && el.classList.remove("is-blown")), 2600);
     });
 
-    // A cake in the gallery opens the order already themed after it
-    document.querySelectorAll("[data-pick]").forEach((a) => a.addEventListener("click", () => {
-      fTheme.value = a.dataset.theme;
-      const n = a.querySelector(".g-name");
-      fIdea.value = `Algo como la torta de ${n ? n.textContent.trim() : "la galería"} (${a.dataset.kind.toLowerCase()})`;
+    // A cake in the gallery or the collection opens the order already themed after it
+    prefill = (name, kind, theme) => {
+      if (theme) fTheme.value = theme;
+      fIdea.value = `Algo como la torta de ${name} (${kind.toLowerCase()})`;
       render();
       setTimeout(() => fName.focus({ preventScroll: true }), 700);
+    };
+    document.querySelectorAll("[data-pick]").forEach((a) => a.addEventListener("click", () => {
+      const n = a.querySelector(".g-name");
+      prefill(n ? n.textContent.trim() : "la galería", a.dataset.kind, a.dataset.theme);
     }));
 
     if (document.fonts) document.fonts.ready.then(render);
     render();
+  }
+
+  /* Collection: filters by theme, the rest on demand, and one cake large in the lightbox */
+  const colGrid = document.querySelector("[data-col-grid]");
+  if (colGrid) {
+    const colItems = [...colGrid.children];
+    const chips = [...document.querySelectorAll(".chip[data-filter]")];
+    const more = document.querySelector("[data-col-more]");
+    const count = document.querySelector("[data-col-count]");
+    const expand = () => {
+      colGrid.classList.remove("is-collapsed");
+      more.hidden = true;
+      more.setAttribute("aria-expanded", "true");
+    };
+    const setFilter = (f) => {
+      chips.forEach((c) => c.setAttribute("aria-pressed", String(c.dataset.filter === f)));
+      let n = 0;
+      colItems.forEach((li) => {
+        const on = f === "todas" || li.dataset.filter === f;
+        li.hidden = !on;
+        if (on) n++;
+      });
+      if (f !== "todas") expand();
+      count.textContent = f === "todas" ? "" : `${n} ${n === 1 ? "torta" : "tortas"} de esta temática`;
+    };
+    chips.forEach((c) => c.addEventListener("click", () => setFilter(c.dataset.filter)));
+    more.addEventListener("click", expand);
+
+    const lb = document.querySelector("[data-lightbox]");
+    const $lb = (s) => lb.querySelector(s);
+    const lbImg = $lb("[data-lb-img]"), lbName = $lb("[data-lb-name]"), lbDetail = $lb("[data-lb-detail]"),
+      lbCount = $lb("[data-lb-count]"), lbOrder = $lb("[data-lb-order]"), lbPost = $lb("[data-lb-post]");
+    let lbCard = null;
+    const shown = () => colItems.filter((li) => !li.hidden).map((li) => li.querySelector("[data-open-cake]"));
+    const showCake = (card) => {
+      lbCard = card;
+      const s = card.dataset.slug;
+      const list = shown();
+      lbImg.classList.add("is-swapping");
+      lbImg.onload = () => lbImg.classList.remove("is-swapping");
+      lbImg.sizes = "(max-width: 760px) 100vw, 60vw";
+      lbImg.srcset = `assets/fotos/${s}-960.webp 960w, assets/fotos/${s}-1600.webp 1600w`;
+      lbImg.src = `assets/fotos/${s}-960.webp`;
+      lbImg.alt = card.querySelector("img").alt;
+      lbName.textContent = card.dataset.name;
+      lbDetail.textContent = card.dataset.detail;
+      lbCount.textContent = `${list.indexOf(card) + 1} de ${list.length}`;
+      lbPost.href = card.dataset.post;
+    };
+    const step = (d) => {
+      const list = shown();
+      showCake(list[(list.indexOf(lbCard) + d + list.length) % list.length]);
+    };
+    colGrid.addEventListener("click", (e) => {
+      const card = e.target.closest("[data-open-cake]");
+      if (!card) return;
+      showCake(card);
+      if (!lb.open) lb.showModal();
+    });
+    $lb("[data-lb-prev]").addEventListener("click", () => step(-1));
+    $lb("[data-lb-next]").addEventListener("click", () => step(1));
+    $lb("[data-lb-close]").addEventListener("click", () => lb.close());
+    lb.addEventListener("click", (e) => { if (e.target === lb) lb.close(); });
+    lb.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight") step(1);
+      if (e.key === "ArrowLeft") step(-1);
+    });
+    lbOrder.addEventListener("click", (e) => {
+      e.preventDefault();
+      const card = lbCard;
+      lb.close();
+      prefill(card.dataset.name, card.dataset.detail.split(" · ")[0], card.dataset.theme);
+      document.querySelector("#pedido").scrollIntoView({ behavior: reduced.matches ? "auto" : "smooth" });
+    });
   }
 
   /* Phone dock hides where the order already is */
@@ -324,6 +403,14 @@
       dock.classList.toggle("is-hidden", hide.size > 0);
     });
     [hero, document.querySelector("#pedido"), document.querySelector(".foot")].forEach((el) => el && dio.observe(el));
+    // It steps aside while you read down and comes back when you scroll up
+    let lastY = scrollY;
+    addEventListener("scroll", () => {
+      const y = scrollY;
+      if (Math.abs(y - lastY) < 8) return;
+      dock.classList.toggle("is-tucked", y > lastY);
+      lastY = y;
+    }, { passive: true });
   }
 
   /* Entrances: heading, then text, then picture, once per section */
