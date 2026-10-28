@@ -1,66 +1,477 @@
-<!DOCTYPE html>
-<html lang="es-CO">
+<!doctype html>
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#26b9bc">
-  <meta name="description" content="Crazy Cakes Bogotá: pastelería artística y repostería personalizada. Descubre nuestras tortas, figuras hechas a mano y prepara tu cotización por WhatsApp.">
-  <meta property="og:title" content="Crazy Cakes Bogotá · Arte y dulce">
-  <meta property="og:description" content="Una idea un poco loca. Una torta inolvidable. Pastelería y repostería personalizada en Bogotá.">
-  <title>Crazy Cakes Bogotá · Arte y dulce</title>
+  <title>Crazy Cakes Bogotá · Tortas esculpidas a mano</title>
+  <meta name="description" content="Tortas personalizadas en Bogotá con figuras modeladas a mano, sin moldes, y el nombre de quien celebra. Pídela por WhatsApp con anticipación. Cursos de modelado y chocomodelado.">
+  <meta name="theme-color" content="#14183a">
+  <meta property="og:title" content="Crazy Cakes Bogotá · Tortas esculpidas a mano">
+  <meta property="og:description" content="Dragones, dinosaurios, personajes y el nombre de quien celebra, modelados pieza por pieza y sin moldes.">
+  <meta property="og:image" content="https://listoia21-pixel.github.io/crazy-cakes-bogota/assets/tortas/dragon-rojo.jpg">
+  <meta property="og:image:width" content="640">
+  <meta property="og:image:height" content="640">
+  <meta property="og:url" content="https://listoia21-pixel.github.io/crazy-cakes-bogota/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_CO">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Propuesta para el cliente: quitar noindex cuando Crazy Cakes la apruebe como sitio oficial -->
+  <meta name="robots" content="noindex">
   <link rel="icon" href="assets/logo.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Leckerli+One&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="assets/tortas/dragon-rojo.jpg" fetchpriority="high">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="motion.css">
-  <script src="gallery-data.js" defer></script>
-  <script src="app.js" defer></script>
-  <script src="motion.js" defer></script>
+  <script>document.documentElement.classList.add("js");setTimeout(function(){var h=document.querySelector(".hero");h&&h.classList.add("is-on");if(!window.__cc){document.querySelectorAll("[data-reveal],[data-open]").forEach(function(e){e.classList.add("is-in")});document.querySelectorAll("[data-step]").forEach(function(e){e.classList.add("is-lit")})}},3000);</script>
 </head>
 <body>
-  <a href="#contenido" class="skip-link">Saltar al contenido</a>
-  <div class="announcement"><span class="tiny-spark">✦</span> Tu próxima celebración merece un toque Crazy <span class="tiny-spark">✦</span> <span class="announcement-extra">Agenda tu pedido con anticipación</span></div>
-  <header class="site-header">
-    <a class="brand" href="#inicio" aria-label="Crazy Cakes Bogotá, inicio"><img src="assets/logo.jpg" alt="Logo Crazy Cakes Bogotá" width="66" height="66"><span>Crazy Cakes<small>BOGOTÁ · ARTE Y DULCE</small></span></a>
-    <button id="menu-toggle" class="menu-toggle" type="button" aria-label="Abrir menú" aria-controls="main-nav" aria-expanded="false"><span></span><span></span></button>
-    <nav id="main-nav" aria-label="Navegación principal"><a href="#creaciones">Nuestras creaciones</a><a href="#nosotros">El toque Crazy</a><a href="#como-pedir">Cómo pedir</a><a class="nav-cta" href="#pedido">Hagamos tu torta <span aria-hidden="true">↗</span></a></nav>
+  <a class="skip" href="#contenido">Saltar al contenido</a>
+
+  <header class="bar" data-bar>
+    <a class="brand" href="#inicio" aria-label="Crazy Cakes Bogotá, inicio">
+      <img src="assets/logo.jpg" alt="" width="150" height="150">
+      <span>Crazy Cakes</span>
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <a href="#tortas">Tortas</a>
+      <a href="#como-pedir">Cómo pedir</a>
+      <a href="#cursos">Cursos</a>
+      <a href="#preguntas">Preguntas</a>
+    </nav>
+    <a class="btn btn-sm" href="#pedido">Pedir mi torta</a>
   </header>
+
   <main id="contenido">
-    <section class="hero section-shell" id="inicio" aria-labelledby="hero-title">
-      <div class="hero-copy"><p class="eyebrow"><span class="status-dot"></span> PASTELERÍA CREATIVA EN BOGOTÁ</p><h1 id="hero-title">Si lo puedes<br>imaginar,<br><span>lo puedes</span><br><span class="cake-word">celebrar.<svg viewBox="0 0 390 25" aria-hidden="true"><path d="M5 15C100 1 270 1 382 13M19 23C154 9 281 10 366 17"/></svg></span></h1><p class="hero-description">Ideas un poco locas. Tortas que se roban las miradas. Creamos el lado más dulce de eso que te hace único.</p><div class="hero-actions"><a class="button button-dark" href="#pedido">Cuéntanos tu idea <span aria-hidden="true">↗</span></a><a class="text-link" href="#creaciones">Quiero inspirarme <span aria-hidden="true">↓</span></a></div><div class="hero-footnote"><span class="drawn-star" aria-hidden="true">✳</span><p>Tortas personalizadas<br><strong>y figuras hechas a mano</strong></p></div></div>
-      <div class="hero-art"><div class="hero-frame"><img class="hero-image" src="assets/torta-dragon.jpg" alt="Torta artística con un dragón rojo modelado, creación de Crazy Cakes Bogotá" fetchpriority="high" width="640" height="780"><div class="hero-caption"><span>DE LA IMAGINACIÓN A LA MESA</span><span aria-hidden="true">↗</span></div></div><div class="art-sticker"><span>un poquito</span><strong>CRAZY</strong><span>mucho arte</span></div><svg class="hero-doodle" viewBox="0 0 130 100" aria-hidden="true"><path d="M15 80C64 98 113 71 103 38C96 15 57 16 59 41C61 62 87 61 103 47M103 47L119 54M103 47L109 65"/></svg><span class="hero-star" aria-hidden="true">✦</span><div class="image-label">Hecho para sorprender.<br><span>Y para comérselo.</span></div></div>
+    <!-- Hero: the lights go out and the cake comes in -->
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <h1 id="hero-title" class="hero-title" data-lines>Tortas esculpidas a mano en Bogotá</h1>
+        <p class="hero-sub" data-reveal>Dragones, dinosaurios, personajes y el nombre de quien celebra, modelados pieza por pieza y sin moldes.</p>
+        <div class="hero-actions" data-reveal>
+          <a class="btn btn-lg" href="#pedido">Pedir mi torta <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="link" href="#tortas">Ver las tortas</a>
+        </div>
+        <ul class="proof" data-reveal>
+          <li><strong>18,2 mil</strong> personas siguen sus tortas en Instagram</li>
+          <li><strong>100 %</strong> de recomendación en Facebook</li>
+        </ul>
+      </div>
+
+      <figure class="stage" data-stage aria-roledescription="carrusel" aria-label="Tortas recientes">
+        <div class="halo" aria-hidden="true"></div>
+        <svg class="candle" viewBox="0 0 40 150" aria-hidden="true">
+          <defs><clipPath id="candle-body"><rect x="11" y="50" width="18" height="100" rx="4"/></clipPath></defs>
+          <rect x="11" y="50" width="18" height="100" rx="4" class="candle-wax"/>
+          <g clip-path="url(#candle-body)" class="candle-stripes">
+            <path d="M0 62l40-16v8L0 70zM0 84l40-16v8L0 92zM0 106l40-16v8L0 114zM0 128l40-16v8L0 136zM0 150l40-16v8L0 158z"/>
+          </g>
+          <path d="M20 38v12" class="candle-wick"/>
+          <path class="flame" d="M20 4c9 11 12 20 7 29-2 4-5 6-7 6s-5-2-7-6c-5-9-2-18 7-29z"/>
+          <path class="flame-core" d="M20 20c4 6 5 10 2 14-1 1-1 2-2 2s-1-1-2-2c-3-4-2-8 2-14z"/>
+        </svg>
+        <div class="arch">
+          <img class="is-on" src="assets/tortas/dragon-rojo.jpg" alt="Torta de chocolate con llamas y un dragón rojo modelado a mano, con el nombre Rocco" width="640" height="640" fetchpriority="high" data-slide data-name="Rocco" data-note="Dragón rojo modelado a mano, sobre chocolate y llamas">
+          <img src="assets/tortas/stranger-things.jpg" alt="Torta negra de dos pisos de Stranger Things con el Demogorgon modelado encima" width="640" height="640" loading="lazy" data-slide data-name="Hawkins" data-note="El Demogorgon de Stranger Things, en dos pisos">
+          <img src="assets/tortas/mario.jpg" alt="Torta de tres pisos de Mario Bros con estrellas, el número 5 y el nombre Salvador" width="480" height="640" loading="lazy" data-slide data-name="Salvador" data-note="Mario Bros y sus amigos para sus 5 años">
+          <img src="assets/tortas/moana.jpg" alt="Torta azul de Moana remando en su canoa entre olas y flores" width="480" height="640" loading="lazy" data-slide data-name="Moana" data-note="Moana en su canoa, entre olas y flores">
+        </div>
+        <figcaption class="plate" aria-live="polite">
+          <span class="plate-name" data-plate-name>Rocco</span>
+          <span class="plate-note" data-plate-note>Dragón rojo modelado a mano, sobre chocolate y llamas</span>
+        </figcaption>
+        <div class="dots" role="group" aria-label="Elegir torta">
+          <button type="button" aria-label="Torta de Rocco" aria-pressed="true" data-dot="0"></button>
+          <button type="button" aria-label="Torta de Hawkins" aria-pressed="false" data-dot="1"></button>
+          <button type="button" aria-label="Torta de Salvador" aria-pressed="false" data-dot="2"></button>
+          <button type="button" aria-label="Torta de Moana" aria-pressed="false" data-dot="3"></button>
+        </div>
+      </figure>
     </section>
-    <div class="brand-strip" aria-label="Arte y dulce, hecho a tu manera"><div><span>ARTE Y DULCE</span><b>✳</b><span>IDEAS QUE SE COMEN</span><b>✳</b><span>HECHO A TU MANERA</span><b>✳</b><span>CRAZY CAKES BOGOTÁ</span><b>✳</b></div></div>
-    <section class="creations section-shell" id="creaciones" aria-labelledby="creations-title"><div class="section-heading"><div><p class="eyebrow">EXPLORA NUESTRO UNIVERSO</p><h2 id="creations-title">Aquí las ideas<br>toman <span class="serif-word">forma.</span></h2></div><p>Personajes, mundos y detalles que hablan de ti.<br>Explora las categorías y encuentra tu próxima inspiración.</p></div><div class="gallery-toolbar"><div class="filters" role="group" aria-label="Filtrar creaciones por categoría">
-<button type="button" data-filter="all" aria-pressed="true">Todas</button>
-<button type="button" data-filter="infantiles" aria-pressed="false">Infantiles</button>
-<button type="button" data-filter="personajes" aria-pressed="false">Cine y personajes</button>
-<button type="button" data-filter="videojuegos" aria-pressed="false">Videojuegos</button>
-<button type="button" data-filter="animales" aria-pressed="false">Animales</button>
-<button type="button" data-filter="arte-fantasia" aria-pressed="false">Arte y fantasía</button>
-<button type="button" data-filter="celebraciones" aria-pressed="false">Celebraciones</button>
-<button type="button" data-filter="deportes" aria-pressed="false">Deportes y pasiones</button>
-</div></div>
-<div class="gallery-overview"><p><span class="portfolio-total" id="portfolio-total">67</span> <span>creaciones, muchas formas de celebrar.</span></p><a class="instagram-link" href="https://www.instagram.com/crazycakesbogota/" target="_blank" rel="noopener noreferrer">Fotos de nuestro Instagram ↗</a></div>
-<span id="gallery-status" class="visually-hidden" aria-live="polite"></span>
-      <div class="gallery-grid" id="gallery-grid">
-        <article class="creation-card" data-category="personajes"><button type="button" data-gallery data-image="assets/torta-stranger-things.webp" data-title="Un universo de otro mundo" data-post="https://www.instagram.com/crazycakesbogota/p/DWDLrJzkecH/" aria-label="Ampliar torta inspirada en Stranger Things"><div class="card-photo"><img src="assets/torta-stranger-things.webp" alt="Torta temática de Stranger Things con figura de Demogorgon" width="600" height="700" loading="lazy"><span class="photo-arrow" aria-hidden="true">↗</span><span class="card-tag">TORTAS TEMÁTICAS</span></div><div class="card-title"><h3>De otro mundo</h3><span>01</span></div></button></article>
-        <article class="creation-card" data-category="arte-fantasia"><button type="button" data-gallery data-image="assets/torta-dragon.jpg" data-title="Una dosis de fantasía" data-post="https://www.instagram.com/crazycakesbogota/p/DVKzokfDhaZ/" aria-label="Ampliar torta de dragón rojo"><div class="card-photo"><img src="assets/torta-dragon.jpg" alt="Dragón rojo comestible sobre una torta de fantasía" width="600" height="700" loading="lazy"><span class="photo-arrow" aria-hidden="true">↗</span><span class="card-tag">FIGURAS A MANO</span></div><div class="card-title"><h3>Una dosis de fantasía</h3><span>02</span></div></button></article>
-        <article class="creation-card" data-category="personajes"><button type="button" data-gallery data-image="assets/torta-personalizada-1.jpg" data-title="Aventura en cada detalle" data-post="https://www.instagram.com/crazycakesbogota/p/DdjSHjfEXqj/" aria-label="Ampliar torta de Moana"><div class="card-photo"><img src="assets/torta-personalizada-1.jpg" alt="Torta de Moana con olas, flores y figuras modeladas" width="600" height="700" loading="lazy"><span class="photo-arrow" aria-hidden="true">↗</span><span class="card-tag">TORTAS TEMÁTICAS</span></div><div class="card-title"><h3>Que empiece la aventura</h3><span>03</span></div></button></article>
-        <article class="creation-card" data-category="celebraciones"><button type="button" data-gallery data-image="assets/torta-abejita.jpg" data-title="Tan dulce como la miel" data-post="https://www.instagram.com/crazycakesbogota/p/Deuuwz4GIXe/" aria-label="Ampliar torta de abejita y miel"><div class="card-photo"><img src="assets/torta-abejita.jpg" alt="Torta de abejita en una taza de miel, con flores modeladas" width="600" height="700" loading="lazy"><span class="photo-arrow" aria-hidden="true">↗</span><span class="card-tag">PARA CELEBRAR</span></div><div class="card-title"><h3>Tan dulce como la miel</h3><span>04</span></div></button></article>
-        <article class="creation-card" data-category="arte-fantasia"><button type="button" data-gallery data-image="assets/torta-personalizada-2.jpg" data-title="Pequeños detalles, grandes historias" data-post="https://www.instagram.com/crazycakesbogota/p/DdjRzmTEc_8/" aria-label="Ampliar torta de Mario y Luigi"><div class="card-photo"><img src="assets/torta-personalizada-2.jpg" alt="Torta de varios pisos con Mario y Luigi modelados a mano" width="600" height="700" loading="lazy"><span class="photo-arrow" aria-hidden="true">↗</span><span class="card-tag">FIGURAS A MANO</span></div><div class="card-title"><h3>Detalles con personalidad</h3><span>05</span></div></button></article>
-        <article class="creation-card" data-category="celebraciones"><button type="button" data-gallery data-image="assets/torta-personalizada-3.jpg" data-title="Una celebración muy tuya" data-post="https://www.instagram.com/crazycakesbogota/p/DdjRhnKEe00/" aria-label="Ampliar torta de Snoopy"><div class="card-photo"><img src="assets/torta-personalizada-3.jpg" alt="Torta de dos pisos de Snoopy para una celebración especial" width="600" height="700" loading="lazy"><span class="photo-arrow" aria-hidden="true">↗</span><span class="card-tag">PARA CELEBRAR</span></div><div class="card-title"><h3>Una celebración muy tuya</h3><span>06</span></div></button></article>
-      </div><div class="gallery-pagination"><p id="gallery-counter" aria-live="polite"></p><button id="gallery-load-more" class="button gallery-more" type="button" aria-controls="gallery-grid" hidden>Ver más tortas <span aria-hidden="true">↓</span></button></div><noscript><p class="gallery-note">Activa JavaScript para explorar todas las fotos y categorías del portafolio.</p></noscript><p class="gallery-note">Fotos de creaciones publicadas por Crazy Cakes Bogotá. Abre una imagen para recorrer la categoría y ver la publicación original. Cada pedido se cotiza según su diseño, tamaño y disponibilidad.</p>
+
+    <!-- The fondant band that runs round every cake -->
+    <div class="band" aria-hidden="true">
+      <div class="band-track ticker">
+        <span>Dragones</span><svg viewBox="0 0 24 32"><path d="M12 2c7 8 9 15 5 22-1 3-3 4-5 4s-4-1-5-4C3 17 5 10 12 2z"/></svg>
+        <span>Dinosaurios</span><svg viewBox="0 0 24 32"><path d="M12 2c7 8 9 15 5 22-1 3-3 4-5 4s-4-1-5-4C3 17 5 10 12 2z"/></svg>
+        <span>Mario Bros</span><svg viewBox="0 0 24 32"><path d="M12 2c7 8 9 15 5 22-1 3-3 4-5 4s-4-1-5-4C3 17 5 10 12 2z"/></svg>
+        <span>Stranger Things</span><svg viewBox="0 0 24 32"><path d="M12 2c7 8 9 15 5 22-1 3-3 4-5 4s-4-1-5-4C3 17 5 10 12 2z"/></svg>
+        <span>Moana</span><svg viewBox="0 0 24 32"><path d="M12 2c7 8 9 15 5 22-1 3-3 4-5 4s-4-1-5-4C3 17 5 10 12 2z"/></svg>
+        <span>Paw Patrol</span><svg viewBox="0 0 24 32"><path d="M12 2c7 8 9 15 5 22-1 3-3 4-5 4s-4-1-5-4C3 17 5 10 12 2z"/></svg>
+        <span>Snoopy</span><svg viewBox="0 0 24 32"><path d="M12 2c7 8 9 15 5 22-1 3-3 4-5 4s-4-1-5-4C3 17 5 10 12 2z"/></svg>
+        <span>El Señor de los Anillos</span><svg viewBox="0 0 24 32"><path d="M12 2c7 8 9 15 5 22-1 3-3 4-5 4s-4-1-5-4C3 17 5 10 12 2z"/></svg>
+        <span>Volver al Futuro</span><svg viewBox="0 0 24 32"><path d="M12 2c7 8 9 15 5 22-1 3-3 4-5 4s-4-1-5-4C3 17 5 10 12 2z"/></svg>
+        <span>Tu idea</span><svg viewBox="0 0 24 32"><path d="M12 2c7 8 9 15 5 22-1 3-3 4-5 4s-4-1-5-4C3 17 5 10 12 2z"/></svg>
+      </div>
+    </div>
+
+    <!-- Gallery: only the cake in front of you is lit -->
+    <section class="gallery" id="tortas" aria-labelledby="g-title" data-gallery>
+      <div class="g-pin">
+        <div class="g-head">
+          <h2 id="g-title" data-reveal>Tortas con nombre propio</h2>
+          <p data-reveal>Cada torta lleva el nombre de quien celebra. Toca una y te dejamos el pedido listo para una parecida.</p>
+        </div>
+        <div class="g-window" data-window>
+        <ol class="g-track" data-track>
+          <li class="g-item g-item-lead">
+            <a class="g-card" href="#pedido" data-pick data-theme="Películas y series" data-kind="Demogorgon de Stranger Things">
+              <span class="g-photo"><img src="assets/tortas/stranger-things.jpg" alt="Torta negra de dos pisos de Stranger Things con el Demogorgon modelado encima y el letrero de Hawkins" width="640" height="640" loading="lazy"></span>
+              <span class="g-name">Hawkins</span>
+              <span class="g-meta">Demogorgon de Stranger Things · dos pisos</span>
+            </a>
+          </li>
+          <li class="g-item">
+            <a class="g-card" href="#pedido" data-pick data-theme="Dragones y fantasía" data-kind="Dragón rojo modelado a mano">
+              <span class="g-photo"><img src="assets/tortas/dragon-rojo.jpg" alt="Torta de chocolate con llamas y un dragón rojo modelado a mano" width="640" height="640" loading="lazy"></span>
+              <span class="g-name">Rocco</span>
+              <span class="g-meta">Dragón rojo · chocolate y llamas</span>
+            </a>
+          </li>
+          <li class="g-item">
+            <a class="g-card" href="#pedido" data-pick data-theme="Dinosaurios" data-kind="Parque de dinosaurios">
+              <span class="g-photo"><img src="assets/tortas/dinosaurios.jpg" alt="Torta de cuatro pisos de Jurassic Park rodeada de dinosaurios modelados a mano" width="640" height="640" loading="lazy"></span>
+              <span class="g-name">Jurassic</span>
+              <span class="g-meta">Dinosaurios sin moldes · cuatro pisos</span>
+            </a>
+          </li>
+          <li class="g-item">
+            <a class="g-card" href="#pedido" data-pick data-theme="Infantil y animalitos" data-kind="Paw Patrol y su torre">
+              <span class="g-photo"><img src="assets/tortas/paw-patrol.jpg" alt="Torta de Paw Patrol con la torre de vigilancia, los cachorros y sus vehículos" width="640" height="640" loading="lazy"></span>
+              <span class="g-name">Jerito</span>
+              <span class="g-meta">Paw Patrol y su torre · 3 años</span>
+            </a>
+          </li>
+          <li class="g-item">
+            <a class="g-card" href="#pedido" data-pick data-theme="Infantil y animalitos" data-kind="Abejita, flores y miel">
+              <span class="g-photo"><img src="assets/tortas/abejita.jpg" alt="Torta blanca con una abejita sobre un tarro de miel, margaritas y el nombre Victoria" width="640" height="640" loading="lazy"></span>
+              <span class="g-name">Victoria</span>
+              <span class="g-meta">Abejita, flores y miel</span>
+            </a>
+          </li>
+          <li class="g-item">
+            <a class="g-card" href="#pedido" data-pick data-theme="Princesas y flores" data-kind="Moana entre las olas">
+              <span class="g-photo"><img src="assets/tortas/moana.jpg" alt="Torta azul de dos pisos con Moana remando en su canoa entre olas y flores" width="480" height="640" loading="lazy"></span>
+              <span class="g-name">Moana</span>
+              <span class="g-meta">Entre las olas · dos pisos y canoa</span>
+            </a>
+          </li>
+          <li class="g-item">
+            <a class="g-card" href="#pedido" data-pick data-theme="Videojuegos" data-kind="Mario Bros y sus amigos">
+              <span class="g-photo"><img src="assets/tortas/mario.jpg" alt="Torta de tres pisos de Mario Bros con estrellas, el número 5 y el nombre Salvador" width="480" height="640" loading="lazy"></span>
+              <span class="g-name">Salvador</span>
+              <span class="g-meta">Mario Bros · 5 años</span>
+            </a>
+          </li>
+          <li class="g-item">
+            <a class="g-card" href="#pedido" data-pick data-theme="Películas y series" data-kind="Snoopy en blanco y negro">
+              <span class="g-photo"><img src="assets/tortas/snoopy.jpg" alt="Torta blanca de dos pisos con Snoopy dibujado en blanco y negro para unos 80 años" width="482" height="640" loading="lazy"></span>
+              <span class="g-name">José Luis</span>
+              <span class="g-meta">Snoopy dibujado a mano · 80 años</span>
+            </a>
+          </li>
+          <li class="g-item">
+            <a class="g-card" href="#pedido" data-pick data-theme="Deportes y pasiones" data-kind="Equipo de paintball">
+              <span class="g-photo"><img src="assets/tortas/paintball.jpg" alt="Torta negra con chorreado rojo y un equipo de jugadores de paintball modelados alrededor" width="480" height="640" loading="lazy"></span>
+              <span class="g-name">Paintball</span>
+              <span class="g-meta">Una figura por jugador</span>
+            </a>
+          </li>
+          <li class="g-item">
+            <a class="g-card" href="#pedido" data-pick data-theme="Infantil y animalitos" data-kind="Obra en construcción con chocolate">
+              <span class="g-photo"><img src="assets/tortas/construccion.jpg" alt="Torta de chocolate en construcción con volqueta, excavadora y señales de obra" width="480" height="640" loading="lazy"></span>
+              <span class="g-name">Oz</span>
+              <span class="g-meta">Obra con chocolate · 3 años</span>
+            </a>
+          </li>
+          <li class="g-item">
+            <a class="g-card" href="#pedido" data-pick data-theme="Películas y series" data-kind="El Señor de los Anillos">
+              <span class="g-photo"><img src="assets/tortas/senor-anillos.jpg" alt="Torta de El Señor de los Anillos con mapa de la Tierra Media, flechas y una espada" width="480" height="640" loading="lazy"></span>
+              <span class="g-name">El anillo</span>
+              <span class="g-meta">Mapa, flechas y espada</span>
+            </a>
+          </li>
+          <li class="g-item">
+            <a class="g-card" href="#pedido" data-pick data-theme="Películas y series" data-kind="El DeLorean de Volver al Futuro">
+              <span class="g-photo"><img src="assets/tortas/volver-futuro.jpg" alt="Torta blanca de Volver al Futuro con el DeLorean dejando un rastro de fuego" width="480" height="640" loading="lazy"></span>
+              <span class="g-name">DeLorean</span>
+              <span class="g-meta">Volver al Futuro · rastro de fuego</span>
+            </a>
+          </li>
+          <li class="g-item g-end">
+            <div class="g-end-card">
+              <p class="g-end-title">¿Y la tuya?</p>
+              <p>Mándanos el personaje, el nombre y la fecha. La modelamos desde cero.</p>
+              <a class="btn" href="#pedido">Pedir la mía</a>
+            </div>
+          </li>
+        </ol>
+        </div>
+        <p class="g-more">Hay muchas más en <a href="https://www.instagram.com/crazycakesbogota/" target="_blank" rel="noopener">Instagram, @crazycakesbogota</a>.</p>
+      </div>
     </section>
-    <section class="crazy-story" id="nosotros" aria-labelledby="story-title"><div class="story-inner section-shell"><div class="story-visual"><div class="story-photo"><img src="assets/torta-abejita.jpg" alt="Detalles de una torta artística de Crazy Cakes Bogotá" width="600" height="650" loading="lazy"></div><span class="story-sticker">100%<br><small>imaginación</small></span><span class="story-flower" aria-hidden="true">✳</span></div><div class="story-copy"><p class="eyebrow">EL TOQUE CRAZY</p><h2 id="story-title">No hay ideas<br>demasiado <span class="serif-word">locas.</span></h2><p class="story-lead">Hay historias que merecen una torta a su altura.</p><p>En Crazy Cakes Bogotá, la pastelería y la repostería personalizada se encuentran con el arte. Un personaje favorito, una pasión o una ocurrencia pueden convertirse en el punto de partida.</p><p>El modelado de figuras a mano y el trabajo en cada detalle hacen parte de nuestro universo. Tú pones la idea. Juntos exploramos cómo darle forma.</p><a class="text-link" href="#pedido">Mi idea empieza aquí <span aria-hidden="true">↗</span></a><div class="story-signature">Arte y dulce, con un toque Crazy.</div></div></div></section>
-    <section class="how section-shell" id="como-pedir" aria-labelledby="how-title"><div class="section-heading"><div><p class="eyebrow">DE TU IDEA A TU CELEBRACIÓN</p><h2 id="how-title">Hagamos algo<br>deliciosamente <span class="serif-word">tuyo.</span></h2></div><div class="anticipation"><span aria-hidden="true">☀</span><p>Las buenas ideas necesitan tiempo.<br><strong>Agenda con anticipación.</strong></p></div></div><div class="steps"><article><span class="step-number">01 <i aria-hidden="true">↗</i></span><h3>Suéñala</h3><p>Cuéntanos qué celebras, para cuándo la necesitas y qué idea tienes en mente.</p></article><article><span class="step-number">02 <i aria-hidden="true">✳</i></span><h3>Démosle forma</h3><p>Conversa con nosotros por WhatsApp para definir diseño, porciones y cotización.</p></article><article><span class="step-number">03 <i aria-hidden="true">♡</i></span><h3>Que empiece la fiesta</h3><p>Confirma los detalles de tu pedido, la disponibilidad y la entrega directamente con el equipo.</p></article></div></section>
-    <section class="order-section" id="pedido" aria-labelledby="order-title"><div class="order-inner section-shell"><div class="order-copy"><p class="eyebrow">TU IDEA ES EL PRIMER INGREDIENTE</p><h2 id="order-title">¿Qué vamos<br>a <span>crear?</span></h2><p>Una torta con tu personalidad empieza por una conversación. Cuéntanos un poco y prepara tu mensaje para WhatsApp.</p><a class="contact-direct" href="https://wa.me/573171812316" target="_blank" rel="noopener noreferrer"><span class="contact-icon" aria-hidden="true">↗</span><span>¿Prefieres hablar directamente?<strong>317 181 2316</strong></span></a><div class="order-doodle" aria-hidden="true">let’s<br><span>cake!</span><svg viewBox="0 0 140 60"><path d="M10 10c30 70 110 43 115 16m0 0-23 5m23-5-2 22"/></svg></div></div><form id="order-form" class="order-form"><div class="form-heading"><span>Un poco de ti y de tu idea</span><span aria-hidden="true">✦</span></div><div class="form-grid"><div class="field"><label for="customer-name">Tu nombre <span>(opcional)</span></label><input type="text" id="customer-name" name="name" autocomplete="given-name" placeholder="¿Cómo te llamas?" maxlength="80"></div><div class="field"><label for="occasion">¿Qué celebras?</label><select id="occasion" name="occasion" required><option value="">Elige una ocasión</option value="Cumpleaños">Cumpleaños</option><option value="Celebración infantil">Celebración infantil</option><option value="Aniversario">Aniversario</option><option value="Evento especial">Evento especial</option><option value="Otra ocasión">Otra ocasión</option></select></div><div class="field"><label for="event-date">Fecha de tu celebración</label><input type="date" id="event-date" name="date" required></div><div class="field"><label for="servings">¿Para cuántas personas?</label><input type="number" id="servings" name="servings" placeholder="Ej. 15" min="1" max="1000" step="1" required></div><div class="field full-width"><label for="idea">Cuéntanos tu idea</label><textarea id="idea" name="idea" rows="3" placeholder="Personajes, colores, temática… ¡aquí empieza la magia!" maxlength="1500" required></textarea></div></div><p class="form-note">La cotización y la disponibilidad se confirman con el negocio. Este formulario solo prepara tu mensaje; no reserva ni envía datos automáticamente.</p><button class="button button-dark form-submit" type="submit">Preparar mi pedido <span aria-hidden="true">↗</span></button><p id="order-summary" class="form-status" role="status" aria-live="polite"></p><div id="order-preview" hidden><h3>Tu idea está lista para compartir</h3><pre id="message-preview"></pre><div class="preview-actions"><a id="send-order" class="button button-dark" href="https://wa.me/573171812316" target="_blank" rel="noopener noreferrer">Abrir en WhatsApp ↗</a><button id="copy-order" class="copy-button" type="button">Copiar mensaje</button></div><p id="copy-status" role="status"></p></div></form></div></section>
-    <section class="faq section-shell" aria-labelledby="faq-title"><div><p class="eyebrow">ANTES DE PONERNOS EL DELANTAL</p><h2 id="faq-title">Dudas <span class="serif-word">dulces.</span></h2></div><div class="faq-list"><details><summary>¿Con cuánta anticipación debo pedir?<span aria-hidden="true">+</span></summary><p>Agenda tu pedido con anticipación, como indicamos en nuestro Instagram. Escríbenos con la fecha de tu celebración para consultar la disponibilidad y el tiempo necesario para tu diseño.</p></details><details><summary>¿Puedo llevar mi propia idea o referencia?<span aria-hidden="true">+</span></summary><p>Sí: el punto de partida de la repostería personalizada es tu idea. Comparte tu temática y tus referencias por WhatsApp para conversar sobre el diseño y sus posibilidades.</p></details><details><summary>¿Cuánto cuesta una torta personalizada?<span aria-hidden="true">+</span></summary><p>Solicita una cotización con tu idea, fecha y número de personas. El equipo confirmará el valor de tu pedido y las opciones disponibles directamente contigo.</p></details><details><summary>¿Cómo coordino la entrega y el pago?<span aria-hidden="true">+</span></summary><p>Consulta por WhatsApp las opciones de entrega o recogida y los medios de pago antes de confirmar. Allí podrás acordar las condiciones de tu pedido con el equipo.</p></details></div></section>
-    <section class="social-banner section-shell"><div><p class="eyebrow">EL ANTOJO SIGUE EN INSTAGRAM</p><h2>Un poquito más de <span class="serif-word">Crazy.</span></h2></div><a href="https://www.instagram.com/crazycakesbogota/" target="_blank" rel="noopener noreferrer">@crazycakesbogota <span aria-hidden="true">↗</span></a></section>
+
+    <!-- Craft: no moulds -->
+    <section class="craft field-teal" id="sin-moldes" aria-labelledby="c-title">
+      <div class="craft-head">
+        <h2 id="c-title" data-reveal>Sin moldes, pieza por pieza</h2>
+        <p class="lead" data-reveal>Cada figura empieza como una bola de fondant y se modela a mano, escama por escama. No hay dos iguales.</p>
+      </div>
+      <div class="craft-grid">
+        <figure class="craft-fig craft-a">
+          <div class="craft-photo" data-open><img src="assets/tortas/dinosaurios.jpg" alt="Detalle de los dinosaurios modelados a mano alrededor de la torta de Jurassic Park" width="640" height="640" loading="lazy" data-drift></div>
+          <figcaption data-reveal>
+            <h3>Un parque entero</h3>
+            <p>T-rex, pterodáctilos y un mosasaurio saliendo del agua. Todas las figuras fueron hechas a mano, sin uso de moldes.</p>
+          </figcaption>
+        </figure>
+        <figure class="craft-fig craft-b">
+          <div class="craft-photo" data-open><img src="assets/tortas/paintball.jpg" alt="Equipo de jugadores de paintball modelados uno por uno alrededor de una torta negra con chorreado rojo" width="480" height="640" loading="lazy"></div>
+          <figcaption data-reveal>
+            <h3>Un equipo con nombre propio</h3>
+            <p>Cada jugador con su barba, sus gafas y su equipo. Mándanos fotos de los tuyos y los modelamos.</p>
+          </figcaption>
+        </figure>
+        <figure class="craft-fig craft-c">
+          <div class="craft-photo" data-open><img src="assets/tortas/snoopy.jpg" alt="Snoopy y Charlie Brown dibujados en fondant sobre una torta blanca de dos pisos" width="482" height="640" loading="lazy"></div>
+          <figcaption data-reveal>
+            <h3>Dibujado, no impreso</h3>
+            <p>Snoopy y Charlie Brown trazados en fondant para los 80 años de José Luis, con globo de diálogo y todo.</p>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- How to order: four candles, one lit at a time -->
+    <section class="steps" id="como-pedir" aria-labelledby="s-title">
+      <div class="steps-head">
+        <h2 id="s-title" data-reveal>Así se pide una torta</h2>
+        <p data-reveal>Todo pasa por WhatsApp y con anticipación: cada figura se modela a mano y la agenda se llena, sobre todo en temporada.</p>
+      </div>
+      <ol class="step-list">
+        <li class="step" style="--wax: var(--teal)" data-step>
+          <div class="step-verb">
+            <svg class="step-flame" viewBox="0 0 24 32" aria-hidden="true"><path d="M12 2c7 8 9 15 5 22-1 3-3 4-5 4s-4-1-5-4C3 17 5 10 12 2z"/></svg>
+            <h3>Imagina</h3>
+          </div>
+          <p class="step-text">Cuéntanos qué celebras, el nombre y la edad, y mándanos referencias: un personaje, una foto, un dibujo.</p>
+          <div class="chat" data-ui role="img" aria-label="Ejemplo de conversación por WhatsApp pidiendo una torta de dragón">
+            <p class="msg msg-out">Hola, quiero una torta de dragón rojo para Rocco, con llamas.</p>
+            <p class="msg msg-out">Es para el 14 de diciembre, unas 25 personas.</p>
+            <p class="msg msg-in">¡Qué buena idea! Te mandamos el diseño y la cotización.</p>
+          </div>
+        </li>
+        <li class="step" style="--wax: var(--flame)" data-step>
+          <div class="step-verb">
+            <svg class="step-flame" viewBox="0 0 24 32" aria-hidden="true"><path d="M12 2c7 8 9 15 5 22-1 3-3 4-5 4s-4-1-5-4C3 17 5 10 12 2z"/></svg>
+            <h3>Agenda</h3>
+          </div>
+          <p class="step-text">Las figuras toman tiempo. Separa tu fecha apenas la tengas; la confirmamos por WhatsApp.</p>
+          <div class="cal" aria-hidden="true">
+            <span class="cal-day">14</span>
+            <span class="cal-month">de diciembre</span>
+            <span class="cal-note">Torta de Rocco · 25 personas</span>
+          </div>
+        </li>
+        <li class="step" style="--wax: var(--pink)" data-step>
+          <div class="step-verb">
+            <svg class="step-flame" viewBox="0 0 24 32" aria-hidden="true"><path d="M12 2c7 8 9 15 5 22-1 3-3 4-5 4s-4-1-5-4C3 17 5 10 12 2z"/></svg>
+            <h3>Modelamos</h3>
+          </div>
+          <p class="step-text">Bizcocho, relleno, cubierta y cada figura, pieza por pieza, en nuestro taller de Villa del Prado.</p>
+          <div class="step-photo" data-open><img src="assets/tortas/dragon-rojo.jpg" alt="Primer plano del dragón rojo con las alas abiertas y garras blancas" width="640" height="640" loading="lazy"></div>
+        </li>
+        <li class="step" style="--wax: var(--cream)" data-step>
+          <div class="step-verb">
+            <svg class="step-flame" viewBox="0 0 24 32" aria-hidden="true"><path d="M12 2c7 8 9 15 5 22-1 3-3 4-5 4s-4-1-5-4C3 17 5 10 12 2z"/></svg>
+            <h3>Celebra</h3>
+          </div>
+          <p class="step-text">Coordinamos contigo la entrega o la recogida. Lo demás es apagar las velas.</p>
+          <div class="step-photo" data-open><img src="assets/tortas/paw-patrol.jpg" alt="Torta de Paw Patrol con la torre, los cachorros y el nombre del cumpleañero, lista para la fiesta" width="640" height="640" loading="lazy"></div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- Order: the live thing -->
+    <section class="order field-yellow" id="pedido" aria-labelledby="o-title">
+      <div class="order-copy">
+        <h2 id="o-title" data-reveal>Tu nombre en la torta</h2>
+        <p class="order-lead" data-reveal>Escribe los datos y mira cómo quedaría. Cuando esté lista, sopla la vela: te armamos el mensaje para WhatsApp.</p>
+        <form class="order-form" data-order action="https://wa.me/573171812316" method="get" target="_blank">
+          <div class="field">
+            <label for="f-name">Nombre en la torta</label>
+            <input id="f-name" name="nombre" type="text" maxlength="14" autocomplete="off" placeholder="Rocco">
+          </div>
+          <div class="field field-short">
+            <label for="f-age">Edad</label>
+            <input id="f-age" name="edad" type="number" min="1" max="120" inputmode="numeric" placeholder="5">
+          </div>
+          <div class="field">
+            <label for="f-theme">Temática</label>
+            <select id="f-theme" name="tema">
+              <option>Dragones y fantasía</option>
+              <option>Dinosaurios</option>
+              <option>Películas y series</option>
+              <option>Videojuegos</option>
+              <option>Infantil y animalitos</option>
+              <option>Princesas y flores</option>
+              <option>Deportes y pasiones</option>
+              <option>Otra idea</option>
+            </select>
+          </div>
+          <div class="field field-short">
+            <label for="f-people">Personas</label>
+            <input id="f-people" name="personas" type="number" min="5" max="300" inputmode="numeric" placeholder="25">
+          </div>
+          <div class="field field-wide">
+            <label for="f-date">Fecha de la celebración</label>
+            <input id="f-date" name="fecha" type="date" aria-describedby="f-days">
+            <p class="days" id="f-days" data-days aria-live="polite">Mientras antes la pidas, más fácil es separar tu fecha.</p>
+          </div>
+          <div class="field field-wide">
+            <label for="f-idea">Tu idea <span>(opcional)</span></label>
+            <textarea id="f-idea" name="idea" rows="3" placeholder="Un dragón rojo con llamas alrededor"></textarea>
+          </div>
+          <input type="hidden" name="text" value="Hola Crazy Cakes, quiero cotizar una torta personalizada." data-fallback-text>
+          <button class="btn btn-lg btn-ink" type="submit" data-blow>Sopla y pide tu deseo <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <p class="form-note">Se abre WhatsApp con tu mensaje listo. Nada se envía hasta que tú lo mandes; la cotización y la fecha las confirmamos por allí.</p>
+        </form>
+      </div>
+
+      <div class="order-preview">
+        <div class="cake-room" data-room>
+          <svg class="cake" viewBox="0 0 480 560" role="img" aria-labelledby="cake-label" data-cake>
+            <title id="cake-label">Vista previa de la torta con el nombre Rocco</title>
+            <g class="cake-stand">
+              <path d="M24 474h432v18a12 12 0 0 1-24 0a12 12 0 0 1-24 0a12 12 0 0 1-24 0a12 12 0 0 1-24 0a12 12 0 0 1-24 0a12 12 0 0 1-24 0a12 12 0 0 1-24 0a12 12 0 0 1-24 0a12 12 0 0 1-24 0a12 12 0 0 1-24 0a12 12 0 0 1-24 0a12 12 0 0 1-24 0a12 12 0 0 1-24 0a12 12 0 0 1-24 0a12 12 0 0 1-24 0a12 12 0 0 1-24 0a12 12 0 0 1-24 0a12 12 0 0 1-24 0z"/>
+              <rect x="214" y="500" width="52" height="34" rx="4" class="cake-stem"/>
+              <rect x="150" y="530" width="180" height="22" rx="11"/>
+            </g>
+            <rect x="66" y="300" width="348" height="174" rx="16" class="c-tier"/>
+            <path class="c-shade" d="M336 300h62a16 16 0 0 1 16 16v142a16 16 0 0 1-16 16h-62z"/>
+            <path class="c-drip" d="M66 314a14 14 0 0 1 14-14h320a14 14 0 0 1 14 14v16c0 10-14 10-14 0v-2c0 18-20 18-20 0v6c0 12-18 12-18 0v-8c0 22-22 22-22 0v2c0 9-16 9-16 0v-6c0 26-22 26-22 0v4c0 12-18 12-18 0v-8c0 16-20 16-20 0v6c0 10-16 10-16 0v-4c0 24-22 24-22 0v-2c0 12-18 12-18 0v4c0 18-20 18-20 0v-6c0 10-16 10-16 0v2c0 20-22 22-22 0v-4c0 12-16 12-16 0v-8z"/>
+            <path class="c-gloss" d="M86 309h60M300 309h44"/>
+            <g class="c-dots">
+              <circle cx="98" cy="452" r="7"/><circle cx="146" cy="452" r="7"/><circle cx="194" cy="452" r="7"/><circle cx="240" cy="452" r="7"/><circle cx="286" cy="452" r="7"/><circle cx="334" cy="452" r="7"/><circle cx="382" cy="452" r="7"/>
+            </g>
+            <rect x="126" y="178" width="228" height="128" rx="14" class="c-tier"/>
+            <path class="c-shade" d="M298 178h42a14 14 0 0 1 14 14v100a14 14 0 0 1-14 14h-42z"/>
+            <path class="c-drip" d="M126 190a12 12 0 0 1 12-12h204a12 12 0 0 1 12 12v12c0 10-14 10-14 0v4c0 14-18 14-18 0v-6c0 18-20 18-20 0v2c0 9-14 9-14 0v-4c0 20-20 20-20 0v6c0 10-16 10-16 0v-6c0 14-18 14-18 0v2c0 18-20 18-20 0v-4c0 10-14 10-14 0v4c0 16-18 16-18 0v-8z"/>
+            <path class="c-gloss" d="M144 186h44"/>
+            <path class="c-swag" d="M128 264q18.67 22 37.33 0q18.67 22 37.33 0q18.67 22 37.33 0q18.67 22 37.33 0q18.67 22 37.33 0q18.67 22 37.33 0"/>
+            <g class="c-sprinkles">
+              <rect x="150" y="232" width="12" height="4" rx="2" transform="rotate(-30 156 234)"/><rect x="186" y="246" width="12" height="4" rx="2" transform="rotate(20 192 248)" class="s2"/><rect x="214" y="226" width="12" height="4" rx="2" transform="rotate(60 220 228)"/><rect x="250" y="242" width="12" height="4" rx="2" transform="rotate(-50 256 244)" class="s2"/><rect x="282" y="230" width="12" height="4" rx="2" transform="rotate(15 288 232)"/><rect x="316" y="244" width="12" height="4" rx="2" transform="rotate(-20 322 246)" class="s2"/><rect x="170" y="218" width="12" height="4" rx="2" transform="rotate(80 176 220)" class="s2"/><rect x="304" y="216" width="12" height="4" rx="2" transform="rotate(40 310 218)"/>
+            </g>
+            <rect x="94" y="350" width="292" height="84" rx="42" class="c-plaque"/>
+            <text x="240" y="408" class="c-name" text-anchor="middle" data-name-text>Rocco</text>
+            <g class="c-candle" data-candle>
+              <text x="240" y="170" class="c-number" text-anchor="middle" data-age>5</text>
+              <path d="M240 56v16" class="c-wick"/>
+              <g class="c-flame-wrap" data-flame>
+                <path class="c-flame" d="M240 8c10 12 13 22 8 31-2 4-5 6-8 6s-6-2-8-6c-5-9-2-19 8-31z"/>
+                <path class="c-flame-core" d="M240 24c4 6 5 10 2 15-1 1-1 2-2 2s-1-1-2-2c-3-5-2-9 2-15z"/>
+              </g>
+              <g class="c-smoke" data-smoke>
+                <circle cx="240" cy="40" r="7"/><circle cx="246" cy="26" r="9"/><circle cx="236" cy="10" r="11"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+        <div class="message" data-ui>
+          <h3>Tu mensaje</h3>
+          <p data-message>Hola Crazy Cakes, quiero cotizar una torta personalizada.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Courses -->
+    <section class="courses field-purple" id="cursos" aria-labelledby="k-title">
+      <figure class="courses-fig">
+        <div class="courses-photo" data-open><img src="assets/tortas/abejita.jpg" alt="Abejita sobre un tarro de miel con margaritas, modelada a mano" width="640" height="640" loading="lazy" data-drift></div>
+        <figcaption>Abejita, tarro de miel y margaritas, modelados a mano.</figcaption>
+      </figure>
+      <div class="courses-copy">
+        <h2 id="k-title" data-reveal>Aprende a modelar</h2>
+        <p class="lead" data-reveal>También enseñamos lo que hacemos. Dictamos cursos para pasar de una bola de fondant a un personaje terminado.</p>
+        <ul class="course-list">
+          <li data-reveal>
+            <h3>Modelado de figuras</h3>
+            <p>Personajes y animalitos en fondant, como los que ves sobre nuestras tortas.</p>
+          </li>
+          <li data-reveal>
+            <h3>Chocomodelado</h3>
+            <p>Figuras con chocolate para modelar, el mismo material de muchas de nuestras piezas.</p>
+          </li>
+        </ul>
+        <a class="btn btn-lg" href="https://wa.me/573171812316?text=Hola%20Crazy%20Cakes%2C%20quiero%20informaci%C3%B3n%20sobre%20los%20cursos%20de%20modelado%20y%20chocomodelado." target="_blank" rel="noopener" data-reveal>Preguntar por fechas y cupos <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="preguntas" aria-labelledby="faq-title">
+      <h2 id="faq-title" data-reveal>Preguntas antes de pedir</h2>
+      <div class="faq-list">
+        <details data-reveal>
+          <summary>¿Con cuánta anticipación pido?</summary>
+          <p>Lo antes posible. Cada figura se modela a mano y la agenda se llena, sobre todo en fechas especiales. Escríbenos con la fecha y te confirmamos si está disponible.</p>
+        </details>
+        <details data-reveal>
+          <summary>¿Puedo traer mi propia idea?</summary>
+          <p>Claro, así empiezan todas. Mándanos fotos, dibujos o el personaje favorito por WhatsApp y te proponemos cómo llevarlo a la torta.</p>
+        </details>
+        <details data-reveal>
+          <summary>¿Cuánto cuesta una torta?</summary>
+          <p>Depende del diseño, del número de personas y de las figuras. Con tu idea, la fecha y las porciones te enviamos una cotización exacta.</p>
+        </details>
+        <details data-reveal>
+          <summary>¿Cómo la recibo?</summary>
+          <p>Acordamos por WhatsApp si la recoges en Villa del Prado o si coordinamos una entrega, junto con los medios de pago.</p>
+        </details>
+        <details data-reveal>
+          <summary>¿Cuándo son los cursos?</summary>
+          <p>Abrimos grupos de modelado de figuras y de chocomodelado durante el año. Escríbenos y te contamos las próximas fechas.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact field-pink" id="contacto" aria-labelledby="contact-title">
+      <div class="contact-head">
+        <h2 id="contact-title" data-reveal>Hablemos de tu torta</h2>
+        <p data-reveal>Escríbenos con la fecha, la idea y cuántas personas. Te respondemos con diseño y cotización.</p>
+      </div>
+      <a class="contact-number" href="https://wa.me/573171812316" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp al 317 181 2316">317 181 2316</a>
+      <div class="contact-grid">
+        <div>
+          <h3>Taller</h3>
+          <address>Villa del Prado<br>Cra. 49B #173-36, Bogotá</address>
+          <a href="https://maps.google.com/?q=Cra.+49B+%23173-36,+Bogot%C3%A1" target="_blank" rel="noopener">Cómo llegar</a>
+        </div>
+        <div>
+          <h3>Escríbenos</h3>
+          <p><a href="mailto:crazycakesbogota@outlook.com">crazycakesbogota@outlook.com</a></p>
+          <p>WhatsApp alterno <a href="https://wa.me/573212107841" target="_blank" rel="noopener">321 210 7841</a></p>
+        </div>
+        <div>
+          <h3>Síguenos</h3>
+          <p><a href="https://www.instagram.com/crazycakesbogota/" target="_blank" rel="noopener">Instagram · @crazycakesbogota</a></p>
+          <p><a href="https://www.facebook.com/crazycakesbogota/" target="_blank" rel="noopener">Facebook · Crazy Cakes</a></p>
+        </div>
+      </div>
+    </section>
   </main>
-  <footer><div class="footer-main section-shell"><a class="brand footer-brand" href="#inicio"><img src="assets/logo.jpg" alt="Crazy Cakes Bogotá" width="66" height="66"><span>Crazy Cakes<small>BOGOTÁ · ARTE Y DULCE</small></span></a><p>Pastelería y repostería personalizada.<br>Arte que también se celebra.</p><div><span class="footer-label">HABLEMOS</span><a href="https://wa.me/573171812316" target="_blank" rel="noopener noreferrer">WhatsApp · 317 181 2316 ↗</a><a href="https://www.instagram.com/crazycakesbogota/" target="_blank" rel="noopener noreferrer">Instagram · @crazycakesbogota ↗</a><a href="https://www.facebook.com/crazycakesbogota/" target="_blank" rel="noopener noreferrer">Facebook · Crazy Cakes Bogotá ↗</a><a href="mailto:crazycakesbogota@outlook.com">crazycakesbogota@outlook.com</a><a href="https://wa.me/573212107841" target="_blank" rel="noopener noreferrer">WhatsApp alterno · 321 210 7841 ↗</a></div><div><span class="footer-label">EN BOGOTÁ</span><p>Villa del Prado<br>Cra. 49B #173-36</p><a href="https://www.google.com/maps/search/?api=1&query=Crazy+Cakes+Bogota+Carrera+49B+173-36" target="_blank" rel="noopener noreferrer">Ver ubicación ↗</a></div></div><div class="footer-bottom section-shell"><span>© 2026 Crazy Cakes Bogotá.</span><span>Hecho de ideas. Y de algo muy dulce. ✳</span></div></footer>
-  <a class="floating-whatsapp" href="https://wa.me/573171812316" target="_blank" rel="noopener noreferrer" aria-label="Contactar a Crazy Cakes Bogotá por WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 11.6a8.5 8.5 0 0 1-12.7 7.4L3 20.5l1.5-4.7a8.5 8.5 0 1 1 16-4.2Z"/><path d="M8.5 7.8c.7 3.5 2.5 5.3 6.5 7l1.4-1.7-2.6-1.3-1.2 1c-1.6-.8-2.6-1.8-3.1-3.2l.9-1.2-1.3-2.2Z"/></svg><span>Hablemos</span></a>
-  <dialog id="gallery-dialog" aria-labelledby="dialog-title"><button id="close-gallery" type="button" aria-label="Cerrar imagen">×</button><img id="dialog-image" src="assets/torta-dragon.jpg" alt=""><div class="dialog-navigation"><button id="gallery-prev" type="button" aria-label="Ver torta anterior">←</button><span id="gallery-position" aria-live="polite"></span><button id="gallery-next" type="button" aria-label="Ver torta siguiente">→</button></div><div class="dialog-footer"><h2 id="dialog-title">Creación Crazy Cakes</h2><a id="dialog-instagram" href="https://www.instagram.com/crazycakesbogota/" target="_blank" rel="noopener noreferrer">Ver en Instagram ↗</a></div></dialog>
+
+  <footer class="foot field-teal">
+    <p class="wordmark" aria-hidden="true"><span>Crazy Cakes</span><span>Crazy Cakes</span></p>
+    <div class="foot-row">
+      <p>Arte y dulce, en Bogotá.</p>
+      <p class="foot-links"><a href="#tortas">Tortas</a><a href="#como-pedir">Cómo pedir</a><a href="#cursos">Cursos</a><a href="#pedido">Pedir</a></p>
+      <p>© 2026 Crazy Cakes Bogotá · Fotos de @crazycakesbogota</p>
+    </div>
+  </footer>
+
+  <a class="dock" href="#pedido" data-dock>Pedir mi torta</a>
+
+  <script src="app.js" defer></script>
 </body>
 </html>

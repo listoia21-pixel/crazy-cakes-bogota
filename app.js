@@ -1,372 +1,351 @@
+// Crazy Cakes Bogotá · Opción A «Apaga la luz»
+// Lights on at load, the cakes take turns in the arch, the light travels along the gallery,
+// one step candle lit at a time, and the order candle you blow to send the WhatsApp.
 (() => {
-  'use strict';
+  const WA = "573171812316";
+  const root = document.documentElement;
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+  const wide = matchMedia("(min-width: 1021px)");
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  root.classList.add("js");
+  window.__cc = true;
 
-  const ready = () => {
-    const menuToggle = document.querySelector('#menu-toggle');
-    const navigation = document.querySelector('#main-nav');
-    const setMenuOpen = (open) => {
-      if (!menuToggle || !navigation) return;
-      menuToggle.setAttribute('aria-expanded', String(open));
-      menuToggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
-      navigation.classList.toggle('is-open', open);
-      navigation.dataset.open = String(open);
-    };
-
-    menuToggle?.addEventListener('click', () => {
-      setMenuOpen(menuToggle.getAttribute('aria-expanded') !== 'true');
+  /* Hero: split the title into lines for the rise, then put the plain text back */
+  const hero = document.querySelector(".hero");
+  const title = document.querySelector("[data-lines]");
+  function splitLines(el) {
+    const text = el.textContent.trim();
+    el.innerHTML = text.split(" ").map((w) => `<span class="w">${w}</span>`).join(" ");
+    const lines = [];
+    let top = null;
+    el.querySelectorAll(".w").forEach((w) => {
+      if (w.offsetTop !== top) { lines.push([]); top = w.offsetTop; }
+      lines[lines.length - 1].push(w.textContent);
     });
-    navigation?.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => setMenuOpen(false));
-    });
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && menuToggle?.getAttribute('aria-expanded') === 'true') {
-        setMenuOpen(false);
-        menuToggle.focus();
-      }
-    });
-
-    const filters = [...document.querySelectorAll('[data-filter]')];
-    const galleryGrid = document.querySelector('#gallery-grid') || document.querySelector('.gallery-grid');
-    const galleryStatus = document.querySelector('#gallery-status');
-    const galleryCounter = document.querySelector('#gallery-counter');
-    const loadMore = document.querySelector('#gallery-load-more');
-    const galleryDialog = document.querySelector('#gallery-dialog');
-    const dialogImage = document.querySelector('#dialog-image');
-    const dialogTitle = document.querySelector('#dialog-title');
-    const dialogInstagram = document.querySelector('#dialog-instagram');
-    const closeGallery = document.querySelector('#close-gallery');
-    const galleryPrevious = document.querySelector('#gallery-prev');
-    const galleryNext = document.querySelector('#gallery-next');
-    const galleryPosition = document.querySelector('#gallery-position');
-    const categoryLabels = new Map(filters.map((button) => [button.dataset.filter, button.textContent.trim()]));
-    const instagramHome = 'https://www.instagram.com/crazycakesbogota/';
-    const pageSize = 12;
-    const dynamicGallery = Boolean(galleryGrid) && Array.isArray(window.CRAZY_CAKES_PORTFOLIO);
-    let galleryTrigger = null;
-    let galleryIndex = -1;
-    let shownCount = 0;
-    let activeCategory = 'all';
-    let matchingItems = [];
-
-    const itemCategories = (item) => {
-      const values = Array.isArray(item.categories) ? item.categories : [item.category];
-      return [...new Set(values.filter((value) => typeof value === 'string' && value.trim())
-        .map((value) => value.trim()))];
-    };
-    const safeImage = (value) => {
-      if (typeof value !== 'string' || !value.trim()) return '';
-      try {
-        const url = new URL(value, document.baseURI);
-        if (url.protocol === 'https:' || url.protocol === 'http:'
-          || (url.protocol === 'file:' && document.location.protocol === 'file:')) return value;
-      } catch {
-        // Incomplete data is skipped instead of creating a broken gallery control.
-      }
-      return '';
-    };
-    const safeInstagram = (value) => {
-      try {
-        const url = new URL(value);
-        if (url.protocol === 'https:' && ['instagram.com', 'www.instagram.com'].includes(url.hostname)) {
-          return url.href;
-        }
-      } catch {
-        // A portfolio entry without its own post uses the business profile.
-      }
-      return instagramHome;
-    };
-    const categoryLabel = (category) => categoryLabels.get(category)
-      || category.replace(/-/g, ' ');
-
-    const portfolioItems = dynamicGallery
-      ? window.CRAZY_CAKES_PORTFOLIO.filter((item) => item && typeof item === 'object')
-        .map((item, index) => ({
-          key: `portfolio-${index}`,
-          image: safeImage(item.image),
-          title: typeof item.title === 'string' && item.title.trim()
-            ? item.title.trim() : 'Creación de Crazy Cakes Bogotá',
-          alt: typeof item.alt === 'string' ? item.alt.trim() : '',
-          categories: itemCategories(item),
-          post: safeInstagram(item.post),
-        })).filter((item) => item.image)
-      : [...(galleryGrid?.querySelectorAll('[data-category]') || [])].map((card, index) => {
-        const button = card.querySelector('[data-gallery]');
-        return {
-          key: `fallback-${index}`,
-          image: safeImage(button?.dataset.image || card.querySelector('img')?.getAttribute('src')),
-          title: button?.dataset.title || card.querySelector('h3')?.textContent.trim()
-            || 'Creación de Crazy Cakes Bogotá',
-          alt: card.querySelector('img')?.alt || '',
-          categories: [card.dataset.category],
-          post: safeInstagram(button?.dataset.post),
-          element: card,
-        };
+    el.innerHTML = lines.map((l, i) => `<span class="line" style="--i:${i}"><span>${l.join(" ")}</span></span>`).join("");
+    el.setAttribute("aria-label", text);
+    return text;
+  }
+  if (hero) {
+    const lightsOn = () => hero.classList.add("is-on");
+    if (reduced.matches || !title) lightsOn();
+    else {
+      const ready = document.fonts ? document.fonts.ready : Promise.resolve();
+      ready.then(() => {
+        const text = splitLines(title);
+        title.classList.add("is-split");
+        requestAnimationFrame(() => requestAnimationFrame(lightsOn));
+        setTimeout(() => { title.textContent = text; title.removeAttribute("aria-label"); }, 2400);
       });
-
-    const createGalleryCard = (item, index) => {
-      const card = document.createElement('article');
-      card.className = 'creation-card';
-      card.dataset.category = item.categories[0] || '';
-      card.dataset.categories = item.categories.join(' ');
-      const button = document.createElement('button');
-      button.type = 'button';
-      button.dataset.gallery = '';
-      button.dataset.galleryId = item.key;
-      button.dataset.image = item.image;
-      button.dataset.title = item.title;
-      button.dataset.post = item.post;
-      button.setAttribute('aria-label', `Ampliar: ${item.title}`);
-      const photo = document.createElement('div');
-      photo.className = 'card-photo';
-      const image = document.createElement('img');
-      image.src = item.image;
-      image.alt = item.alt || item.title;
-      image.width = 600;
-      image.height = 700;
-      image.loading = 'lazy';
-      image.decoding = 'async';
-      const arrow = document.createElement('span');
-      arrow.className = 'photo-arrow';
-      arrow.setAttribute('aria-hidden', 'true');
-      arrow.textContent = '↗';
-      const tag = document.createElement('span');
-      tag.className = 'card-tag';
-      const tagCategory = activeCategory === 'all' ? item.categories[0] : activeCategory;
-      tag.textContent = tagCategory ? categoryLabel(tagCategory).toLocaleUpperCase('es-CO') : 'CREACIÓN CRAZY';
-      photo.append(image, arrow, tag);
-      const heading = document.createElement('div');
-      heading.className = 'card-title';
-      const title = document.createElement('h3');
-      title.textContent = item.title;
-      const number = document.createElement('span');
-      number.textContent = String(index + 1).padStart(2, '0');
-      number.setAttribute('aria-hidden', 'true');
-      heading.append(title, number);
-      button.append(photo, heading);
-      card.append(button);
-      return card;
-    };
-
-    const updateGalleryCount = () => {
-      const total = matchingItems.length;
-      const text = `Mostrando ${shownCount} de ${total} fotos`;
-      if (galleryCounter) galleryCounter.textContent = text;
-      if (galleryStatus) {
-        const label = activeCategory === 'all' ? 'el portafolio' : categoryLabel(activeCategory);
-        galleryStatus.textContent = `${total} ${total === 1 ? 'foto' : 'fotos'} en ${label}. ${text}.`;
-      }
-      if (loadMore) loadMore.hidden = !dynamicGallery || shownCount >= total;
-    };
-    const appendGalleryPage = () => {
-      if (!galleryGrid) return null;
-      const fragment = document.createDocumentFragment();
-      const end = Math.min(shownCount + pageSize, matchingItems.length);
-      let firstNewCard = null;
-      for (let index = shownCount; index < end; index += 1) {
-        const card = createGalleryCard(matchingItems[index], index);
-        if (!firstNewCard) firstNewCard = card;
-        fragment.append(card);
-      }
-      galleryGrid.append(fragment);
-      shownCount = end;
-      updateGalleryCount();
-      return firstNewCard;
-    };
-    const filterGallery = (category) => {
-      activeCategory = category || 'all';
-      matchingItems = portfolioItems.filter((item) => activeCategory === 'all'
-        || item.categories.includes(activeCategory));
-      filters.forEach((button) => {
-        button.setAttribute('aria-pressed', String(button.dataset.filter === activeCategory));
-      });
-      if (dynamicGallery) {
-        galleryGrid.replaceChildren();
-        shownCount = 0;
-        appendGalleryPage();
-      } else {
-        portfolioItems.forEach((item) => {
-          item.element.hidden = !matchingItems.includes(item);
-          const button = item.element.querySelector('[data-gallery]');
-          if (button) button.dataset.galleryId = item.key;
-        });
-        shownCount = matchingItems.length;
-        updateGalleryCount();
-      }
-    };
-    filters.forEach((button) => {
-      button.addEventListener('click', () => filterGallery(button.dataset.filter));
-    });
-    filterGallery(filters.find((button) => button.getAttribute('aria-pressed') === 'true')?.dataset.filter || 'all');
-    loadMore?.addEventListener('click', () => {
-      const firstNewCard = appendGalleryPage();
-      firstNewCard?.querySelector('button')?.focus();
-    });
-
-    const showGalleryImage = (index, openDialog = false) => {
-      if (!galleryDialog || !dialogImage || !dialogTitle || !matchingItems.length) return;
-      galleryIndex = (index + matchingItems.length) % matchingItems.length;
-      const item = matchingItems[galleryIndex];
-      dialogTitle.textContent = item.title;
-      dialogImage.src = item.image;
-      dialogImage.alt = item.alt || item.title;
-      if (dialogInstagram) dialogInstagram.href = item.post;
-      if (galleryPosition) galleryPosition.textContent = `${galleryIndex + 1} de ${matchingItems.length}`;
-      if (galleryPrevious) galleryPrevious.disabled = matchingItems.length < 2;
-      if (galleryNext) galleryNext.disabled = matchingItems.length < 2;
-      if (openDialog && !galleryDialog.open) {
-        galleryDialog.showModal();
-        closeGallery?.focus();
-      }
-    };
-    galleryGrid?.addEventListener('click', (event) => {
-      const button = event.target.closest('[data-gallery]');
-      if (!button || !galleryGrid.contains(button)) return;
-      const index = matchingItems.findIndex((item) => item.key === button.dataset.galleryId);
-      if (index < 0) return;
-      galleryTrigger = button;
-      showGalleryImage(index, true);
-    });
-    galleryPrevious?.addEventListener('click', () => showGalleryImage(galleryIndex - 1));
-    galleryNext?.addEventListener('click', () => showGalleryImage(galleryIndex + 1));
-    closeGallery?.addEventListener('click', () => galleryDialog?.close());
-    galleryDialog?.addEventListener('keydown', (event) => {
-      if (!galleryDialog.open || event.altKey || event.ctrlKey || event.metaKey
-        || event.target.closest('input, textarea, select, [contenteditable], [role="textbox"]')) return;
-      if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-        event.preventDefault();
-        showGalleryImage(galleryIndex + (event.key === 'ArrowLeft' ? -1 : 1));
-      }
-    });
-    galleryDialog?.addEventListener('click', (event) => {
-      if (event.target !== galleryDialog) return;
-      const bounds = galleryDialog.getBoundingClientRect();
-      const outside = event.clientX < bounds.left || event.clientX > bounds.right
-        || event.clientY < bounds.top || event.clientY > bounds.bottom;
-      if (outside) galleryDialog.close();
-    });
-    galleryDialog?.addEventListener('close', () => {
-      if (galleryTrigger?.isConnected) galleryTrigger.focus({ preventScroll: true });
-    });
-
-    const orderForm = document.querySelector('#order-form');
-    const occasion = document.querySelector('#occasion');
-    const eventDate = document.querySelector('#event-date');
-    const servings = document.querySelector('#servings');
-    const idea = document.querySelector('#idea');
-    const customerName = document.querySelector('#customer-name');
-    const summary = document.querySelector('#order-summary');
-    const preview = document.querySelector('#order-preview');
-    const messagePreview = document.querySelector('#message-preview');
-    const sendOrder = document.querySelector('#send-order');
-    const copyOrder = document.querySelector('#copy-order');
-    const copyStatus = document.querySelector('#copy-status');
-    let preparedMessage = '';
-
-    if (eventDate) {
-      const today = new Date();
-      eventDate.min = [today.getFullYear(), String(today.getMonth() + 1).padStart(2, '0'),
-        String(today.getDate()).padStart(2, '0')].join('-');
     }
+  }
 
-    const invalidatePreview = () => {
-      if (!preparedMessage) return;
-      preparedMessage = '';
-      if (preview) preview.hidden = true;
-      if (sendOrder) sendOrder.removeAttribute('href');
-      if (copyStatus) copyStatus.textContent = '';
-      if (summary) summary.textContent = 'Actualizaste tu idea. Prepara el mensaje de nuevo para incluir los cambios.';
+  /* Hero: the cakes take turns under the candle */
+  const stage = document.querySelector("[data-stage]");
+  if (stage) {
+    const slides = [...stage.querySelectorAll("[data-slide]")];
+    const dots = [...stage.querySelectorAll("[data-dot]")];
+    const plate = stage.querySelector(".plate");
+    const pName = stage.querySelector("[data-plate-name]");
+    const pNote = stage.querySelector("[data-plate-note]");
+    let i = 0, timer = null, turns = 0, held = false, visible = true;
+
+    const go = (n) => {
+      if (n === i) return;
+      slides[i].classList.remove("is-on");
+      i = (n + slides.length) % slides.length;
+      const s = slides[i];
+      if (!s.complete) s.loading = "eager";
+      s.classList.add("is-on");
+      dots.forEach((d, k) => d.setAttribute("aria-pressed", String(k === i)));
+      plate.classList.add("is-changing");
+      setTimeout(() => {
+        pName.textContent = s.dataset.name;
+        pNote.textContent = s.dataset.note;
+        plate.classList.remove("is-changing");
+      }, 320);
     };
-    orderForm?.addEventListener('input', () => {
-      servings?.setCustomValidity('');
-      invalidatePreview();
-    });
-    orderForm?.addEventListener('change', invalidatePreview);
+    const tick = () => {
+      if (held || !visible || document.hidden) return;
+      go(i + 1);
+      if (i === 0 && ++turns >= 2) stop();
+    };
+    const start = () => { if (!reduced.matches && !timer) timer = setInterval(tick, 5200); };
+    const stop = () => { clearInterval(timer); timer = null; };
 
-    const normalize = (value) => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim().toLowerCase();
-    document.querySelectorAll('[data-choice]').forEach((button) => {
-      button.addEventListener('click', () => {
-        if (occasion) {
-          const choice = normalize(button.dataset.choice || '');
-          const aliases = { tematicas: 'cumpleanos', figuras: 'cumpleanos', celebraciones: 'celebracion especial' };
-          const options = [...occasion.options];
-          const selected = options.find((option) => normalize(option.value) === choice || normalize(option.text) === choice)
-            || options.find((option) => aliases[choice] && (normalize(option.value) === aliases[choice]
-              || normalize(option.text) === aliases[choice]));
-          if (selected) {
-            occasion.value = selected.value;
-            occasion.dispatchEvent(new Event('change', { bubbles: true }));
-          }
-        }
-        document.querySelector('#pedido')?.scrollIntoView({
-          behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
-          block: 'start',
-        });
-        occasion?.focus({ preventScroll: true });
+    dots.forEach((d) => d.addEventListener("click", () => { stop(); go(+d.dataset.dot); }));
+    stage.addEventListener("pointerenter", () => { held = true; });
+    stage.addEventListener("pointerleave", () => { held = false; });
+    stage.addEventListener("focusin", () => { held = true; });
+    stage.addEventListener("focusout", () => { held = false; });
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(stage);
+    }
+    setTimeout(start, 2400);
+  }
+
+  /* Band: two copies of the themes so the loop never shows a seam */
+  const ticker = document.querySelector(".band-track");
+  if (ticker) ticker.innerHTML += ticker.innerHTML;
+
+  /* Bar turns solid once the page moves; the nav marks where you are */
+  const bar = document.querySelector("[data-bar]");
+  const navLinks = [...document.querySelectorAll(".nav a")];
+  const onBar = () => bar && bar.classList.toggle("is-solid", scrollY > 24);
+  addEventListener("scroll", onBar, { passive: true });
+  onBar();
+  if ("IntersectionObserver" in window) {
+    const marks = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        navLinks.forEach((a) => a.classList.toggle("is-here", a.getAttribute("href") === `#${e.target.id}`));
       });
+    }, { rootMargin: "-45% 0px -50% 0px" });
+    navLinks.forEach((a) => { const s = document.querySelector(a.getAttribute("href")); s && marks.observe(s); });
+    hero && marks.observe(hero); // back at the top, no section is marked
+  }
+
+  /* Gallery: pinned on wide screens, the light travels from the first cake to the last */
+  const gallery = document.querySelector("[data-gallery]");
+  const track = document.querySelector("[data-track]");
+  const items = track ? [...track.children] : [];
+  const gdots = [];
+  if (track) {
+    const row = document.createElement("div");
+    row.className = "g-dots";
+    row.setAttribute("aria-hidden", "true");
+    items.forEach(() => gdots.push(row.appendChild(document.createElement("span"))));
+    const foot = document.createElement("div");
+    foot.className = "g-foot";
+    track.parentElement.after(foot);
+    foot.append(row);
+    const more = gallery && gallery.querySelector(".g-more");
+    if (more) foot.append(more);
+  }
+  let distance = 0;
+  const SPEED = 2.2; // the cakes travel faster than the page scrolls
+
+  function layoutGallery() {
+    if (!gallery || !track) return;
+    const pin = wide.matches && !reduced.matches;
+    gallery.classList.toggle("is-pinned", pin);
+    if (pin) {
+      track.style.setProperty("--x", "0px");
+      distance = Math.max(0, track.scrollWidth - track.parentElement.clientWidth);
+      gallery.style.setProperty("--pin-h", `${innerHeight + distance / SPEED}px`);
+    } else {
+      gallery.style.removeProperty("--pin-h");
+      track.style.removeProperty("--x");
+    }
+    lightGallery();
+  }
+
+  function lightGallery() {
+    if (!track || !items.length) return;
+    const pinned = gallery.classList.contains("is-pinned");
+    let p;
+    if (pinned) {
+      p = clamp(-gallery.getBoundingClientRect().top / Math.max(1, distance / SPEED), 0, 1);
+      track.style.setProperty("--x", `${(-p * distance).toFixed(1)}px`);
+    } else {
+      const max = track.scrollWidth - track.clientWidth;
+      p = max > 0 ? clamp(track.scrollLeft / max, 0, 1) : 0;
+    }
+    const first = items[0].getBoundingClientRect();
+    const last = items[items.length - 1].getBoundingClientRect();
+    const span = (last.left + last.width / 2) - (first.left + first.width / 2);
+    const light = first.left + first.width / 2 + p * span;
+    items.forEach((it, k) => {
+      const r = it.getBoundingClientRect();
+      const d = Math.abs(r.left + r.width / 2 - light);
+      const lit = clamp(1 - d / (r.width * 0.95), 0, 1).toFixed(3);
+      it.style.setProperty("--lit", lit);
+      gdots[k] && gdots[k].style.setProperty("--lit", lit);
     });
+  }
 
-    orderForm?.addEventListener('submit', (event) => {
-      event.preventDefault();
-      if (!occasion || !eventDate || !servings || !idea) return;
-      const portions = Number(servings.value);
-      servings.setCustomValidity(Number.isInteger(portions) && portions > 0
-        ? '' : 'Indica un número entero de porciones mayor que cero.');
-      if (!orderForm.reportValidity()) return;
-
-      const dateParts = eventDate.value.split('-').map(Number);
-      const date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
-      const formattedDate = new Intl.DateTimeFormat('es-CO', {
-        day: 'numeric', month: 'long', year: 'numeric',
-      }).format(date);
-      const occasionText = occasion.selectedOptions[0]?.textContent.trim() || occasion.value;
-      const name = customerName?.value.trim();
-      preparedMessage = [
-        '¡Hola, Crazy Cakes Bogotá! Quisiera consultar disponibilidad y cotizar una torta personalizada.',
-        name ? `Mi nombre es ${name}.` : '',
-        '',
-        `Ocasión: ${occasionText}`,
-        `Fecha del evento: ${formattedDate}`,
-        `Porciones aproximadas: ${portions}`,
-        `Mi idea: ${idea.value.trim()}`,
-        '',
-        '¿Me pueden orientar con el diseño y la cotización? ¡Gracias!',
-      ].filter((line, index, lines) => line !== '' || lines[index - 1] !== '').join('\n');
-
-      if (messagePreview) messagePreview.textContent = preparedMessage;
-      if (sendOrder) sendOrder.href = `https://wa.me/573171812316?text=${encodeURIComponent(preparedMessage)}`;
-      if (preview) preview.hidden = false;
-      if (copyStatus) copyStatus.textContent = '';
-      if (summary) {
-        summary.textContent = 'Tu mensaje está listo. Ábrelo en WhatsApp para consultar disponibilidad y cotización.';
-      }
+  track && track.addEventListener("focusin", (e) => {
+    track.parentElement.scrollLeft = 0;
+    if (!gallery.classList.contains("is-pinned")) return;
+    const k = items.indexOf(e.target.closest(".g-item"));
+    if (k < 0) return;
+    requestAnimationFrame(() => {
+      const top = gallery.getBoundingClientRect().top + scrollY;
+      scrollTo({ top: top + (k / (items.length - 1)) * (distance / SPEED), behavior: "instant" });
     });
+  });
 
-    copyOrder?.addEventListener('click', async () => {
-      if (!preparedMessage) return;
-      const messageToCopy = preparedMessage;
-      try {
-        if (navigator.clipboard?.writeText) {
-          await navigator.clipboard.writeText(messageToCopy);
-        } else {
-          const textArea = document.createElement('textarea');
-          textArea.value = messageToCopy;
-          textArea.setAttribute('readonly', '');
-          textArea.style.position = 'fixed';
-          textArea.style.opacity = '0';
-          document.body.appendChild(textArea);
-          textArea.select();
-          const copied = document.execCommand('copy');
-          textArea.remove();
-          copyOrder.focus({ preventScroll: true });
-          if (!copied) throw new Error('Clipboard unavailable');
-        }
-        if (copyStatus && preparedMessage === messageToCopy) copyStatus.textContent = 'Mensaje copiado.';
-      } catch {
-        if (copyStatus) copyStatus.textContent = 'No pudimos copiarlo automáticamente. Puedes seleccionar el mensaje y copiarlo.';
-      }
+  /* Hero: the arch rises a little slower than the page and its light grows */
+  const stageEl = document.querySelector("[data-stage]");
+  function heroDrift() {
+    if (!stageEl || reduced.matches || scrollY > innerHeight * 1.2) return;
+    stageEl.style.setProperty("--hp", clamp(scrollY / innerHeight, 0, 1).toFixed(3));
+  }
+
+  let frame = false;
+  const onScroll = () => {
+    if (frame) return;
+    frame = true;
+    requestAnimationFrame(() => { frame = false; lightGallery(); drift(); heroDrift(); });
+  };
+  addEventListener("scroll", onScroll, { passive: true });
+  track && track.addEventListener("scroll", onScroll, { passive: true });
+  addEventListener("resize", layoutGallery);
+  wide.addEventListener("change", layoutGallery);
+  if (document.fonts) document.fonts.ready.then(layoutGallery);
+  addEventListener("load", layoutGallery);
+  layoutGallery();
+
+  /* A slow drift on the big photographs */
+  const drifters = [...document.querySelectorAll("[data-drift]")];
+  function drift() {
+    if (reduced.matches) return;
+    drifters.forEach((img) => {
+      const r = img.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > innerHeight) return;
+      const c = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
+      img.style.setProperty("--py", `${(c * -28).toFixed(1)}px`);
     });
+  }
+
+  /* Steps: one candle lit at a time */
+  const steps = [...document.querySelectorAll("[data-step]")];
+  if ("IntersectionObserver" in window && steps.length) {
+    const so = new IntersectionObserver((entries) => {
+      entries.forEach((e) => e.target.classList.toggle("is-lit", e.isIntersecting));
+    }, { rootMargin: "-38% 0px -38% 0px" });
+    steps.forEach((s) => so.observe(s));
+  } else steps.forEach((s) => s.classList.add("is-lit"));
+
+  /* Order: the name on the cake, the days left, and the candle you blow */
+  const form = document.querySelector("[data-order]");
+  const THEMES = {
+    "Dragones y fantasía": { cake: "#5a2c19", drip: "#2b140b", band: "#ffb21a", plaque: "#fff6e6", letter: "#d7262e", candle: "#d7262e" },
+    "Dinosaurios": { cake: "#6b4a2b", drip: "#3f8f3a", band: "#9fd36a", plaque: "#f3e3b5", letter: "#2f6b2a", candle: "#3f8f3a" },
+    "Películas y series": { cake: "#232842", drip: "#0d0f1f", band: "#ffc53a", plaque: "#fff6e6", letter: "#c8102e", candle: "#6b3fa0" },
+    "Videojuegos": { cake: "#3aa0e8", drip: "#e3262b", band: "#ffc53a", plaque: "#fff6e6", letter: "#e3262b", candle: "#2fa84f" },
+    "Infantil y animalitos": { cake: "#fff6e6", drip: "#ffc53a", band: "#f2679f", plaque: "#ffd95e", letter: "#14183a", candle: "#f2679f" },
+    "Princesas y flores": { cake: "#f8c9dc", drip: "#ffffff", band: "#6b3fa0", plaque: "#fff6e6", letter: "#6b3fa0", candle: "#f2679f" },
+    "Deportes y pasiones": { cake: "#2f8f4e", drip: "#14183a", band: "#fff6e6", plaque: "#fff6e6", letter: "#14183a", candle: "#ffc53a" },
+    "Otra idea": { cake: "#25b0b4", drip: "#14183a", band: "#ffc53a", plaque: "#fff6e6", letter: "#6b3fa0", candle: "#ffc53a" },
   };
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ready, { once: true });
-  else ready();
+  if (form) {
+    const $ = (s) => form.querySelector(s);
+    const fName = $("#f-name"), fAge = $("#f-age"), fTheme = $("#f-theme"),
+      fPeople = $("#f-people"), fDate = $("#f-date"), fIdea = $("#f-idea");
+    const cake = document.querySelector("[data-cake]");
+    const nameText = document.querySelector("[data-name-text]");
+    const ageText = document.querySelector("[data-age]");
+    const label = document.querySelector("#cake-label");
+    const msgOut = document.querySelector("[data-message]");
+    const daysOut = form.querySelector("[data-days]");
+    const fallback = form.querySelector("[data-fallback-text]");
+    const today = new Date(); today.setHours(12, 0, 0, 0);
+    const iso = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+    fDate.min = iso(today);
+
+    const parse = (v) => { const d = new Date(`${v}T12:00:00`); return isNaN(d) ? null : d; };
+    const longDate = (d) => d.toLocaleDateString("es-CO", { weekday: "long", day: "numeric", month: "long" });
+    const daysLeft = (d) => Math.round((d - today) / 86400000);
+
+    function message() {
+      const lines = ["Hola Crazy Cakes, quiero cotizar una torta personalizada."];
+      const name = fName.value.trim();
+      if (name) lines.push(`Nombre en la torta: ${name}${fAge.value ? `, ${fAge.value} años` : ""}`);
+      else if (fAge.value) lines.push(`Edad: ${fAge.value} años`);
+      lines.push(`Temática: ${fTheme.value}`);
+      if (fPeople.value) lines.push(`Para unas ${fPeople.value} personas`);
+      const d = parse(fDate.value);
+      if (d) lines.push(`Fecha: ${longDate(d)}${daysLeft(d) >= 0 ? ` (faltan ${daysLeft(d)} días)` : ""}`);
+      if (fIdea.value.trim()) lines.push(`Idea: ${fIdea.value.trim()}`);
+      return lines.join("\n");
+    }
+
+    function days() {
+      const d = parse(fDate.value);
+      if (!d) { daysOut.textContent = "Mientras antes la pidas, más fácil es separar tu fecha."; return; }
+      const n = daysLeft(d);
+      if (n < 0) daysOut.textContent = "Esa fecha ya pasó: revisa el día y el año.";
+      else if (n === 0) daysOut.innerHTML = "<strong>Es hoy.</strong> Escríbenos ya y miramos si hay cupo.";
+      else if (n <= 7) daysOut.innerHTML = `<strong>Faltan ${n} ${n === 1 ? "día" : "días"}.</strong> Escríbenos ya para confirmar si hay cupo.`;
+      else daysOut.innerHTML = `<strong>Faltan ${n} días</strong> para tu celebración: buen momento para separar la fecha.`;
+    }
+
+    function render() {
+      const raw = fName.value.trim() || "Rocco";
+      const name = raw.charAt(0).toUpperCase() + raw.slice(1);
+      nameText.textContent = name;
+      nameText.style.fontSize = "56px";
+      const w = nameText.getComputedTextLength ? nameText.getComputedTextLength() : 0;
+      if (w > 250) nameText.style.fontSize = `${Math.max(26, 56 * (250 / w)).toFixed(1)}px`;
+      const age = fAge.value.trim().slice(0, 3) || "5";
+      ageText.textContent = age || "";
+      const t = THEMES[fTheme.value] || THEMES["Otra idea"];
+      Object.entries(t).forEach(([k, v]) => cake.style.setProperty(`--${k}`, v));
+      label.textContent = `Vista previa de la torta con el nombre ${name}${age ? ` y una vela de ${age}` : ""}`;
+      days();
+      const text = message();
+      msgOut.textContent = text;
+      fallback.value = text;
+    }
+
+    form.addEventListener("input", render);
+    form.addEventListener("change", render);
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      window.open(`https://wa.me/${WA}?text=${encodeURIComponent(message())}`, "_blank", "noopener");
+      const room = cake.closest("[data-room]");
+      [cake, room].forEach((el) => { el && el.classList.remove("is-blown"); });
+      void cake.getBoundingClientRect();
+      [cake, room].forEach((el) => { el && el.classList.add("is-blown"); });
+      setTimeout(() => [cake, room].forEach((el) => el && el.classList.remove("is-blown")), 2600);
+    });
+
+    // A cake in the gallery opens the order already themed after it
+    document.querySelectorAll("[data-pick]").forEach((a) => a.addEventListener("click", () => {
+      fTheme.value = a.dataset.theme;
+      const n = a.querySelector(".g-name");
+      fIdea.value = `Algo como la torta de ${n ? n.textContent.trim() : "la galería"} (${a.dataset.kind.toLowerCase()})`;
+      render();
+      setTimeout(() => fName.focus({ preventScroll: true }), 700);
+    }));
+
+    if (document.fonts) document.fonts.ready.then(render);
+    render();
+  }
+
+  /* Phone dock hides where the order already is */
+  const dock = document.querySelector("[data-dock]");
+  if (dock && "IntersectionObserver" in window) {
+    const hide = new Set();
+    const dio = new IntersectionObserver((entries) => {
+      entries.forEach((e) => (e.isIntersecting ? hide.add(e.target) : hide.delete(e.target)));
+      dock.classList.toggle("is-hidden", hide.size > 0);
+    });
+    [hero, document.querySelector("#pedido"), document.querySelector(".foot")].forEach((el) => el && dio.observe(el));
+  }
+
+  /* Entrances: heading, then text, then picture, once per section */
+  const reveals = [...document.querySelectorAll("[data-reveal], [data-open]")];
+  if (reduced.matches || !("IntersectionObserver" in window)) {
+    reveals.forEach((el) => el.classList.add("is-in"));
+  } else {
+    // On phones only the headings rise; everything else is simply there
+    if (matchMedia("(max-width: 760px)").matches) reveals.forEach((el) => { if (!el.matches("h2")) el.classList.add("is-in"); });
+    const groups = new Map();
+    reveals.forEach((el) => {
+      const g = el.closest("li, figure, section, footer") || document.body;
+      const list = groups.get(g) || [];
+      el.style.setProperty("--d", `${list.length * 80}ms`);
+      list.push(el);
+      groups.set(g, list);
+    });
+    const ro = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) { e.target.classList.add("is-in"); ro.unobserve(e.target); }
+      });
+    }, { rootMargin: "0px 0px -6% 0px" });
+    reveals.forEach((el) => { if (!el.classList.contains("is-in")) ro.observe(el); });
+  }
 })();
